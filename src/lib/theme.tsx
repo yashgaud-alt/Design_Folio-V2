@@ -64,10 +64,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       typeof document.startViewTransition === "function";
 
     if (canFade) {
-      document.startViewTransition(() => {
-        flushSync(() => setTheme(next));
-      });
-      return;
+      try {
+        const transition = document.startViewTransition(() => {
+          flushSync(() => setTheme(next));
+        });
+        transition.finished.catch(() => {
+          apply(next);
+        });
+        return;
+      } catch {
+        setTheme(next);
+        return;
+      }
     }
     setTheme(next);
   }, [setTheme, theme]);

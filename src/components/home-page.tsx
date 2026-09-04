@@ -1,4 +1,4 @@
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useMemo, useState, type FormEvent, type KeyboardEvent, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Select, Textarea } from "@/components/ui/input";
@@ -32,20 +32,27 @@ export function HomePage() {
 function Hero() {
   const { toggle, theme } = useTheme();
 
+  function onPhilosophyKey(event: KeyboardEvent<HTMLHeadingElement>) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggle();
+    }
+  }
+
   return (
     <section className="relative overflow-visible px-5 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
       <div className="rise overflow-visible">
-        <button
-          type="button"
+        <h1
+          role="button"
+          tabIndex={0}
           onClick={toggle}
-          className="philosophy block max-w-4xl text-left"
+          onKeyDown={onPhilosophyKey}
+          className="philosophy max-w-4xl font-serif text-display leading-tight tracking-display"
           aria-label={`Philosophy. Currently ${theme} paper. Click to invert.`}
           title="Click to invert paper and ink"
         >
-          <h1 className="font-serif text-display leading-tight tracking-display">
-            Designing just <em>enough</em>
-          </h1>
-        </button>
+          Designing just <em>enough</em>
+        </h1>
       </div>
       <p className="rise rise-2 mt-6 max-w-xl text-base leading-normal text-fg-muted">
         {profile.bio}

@@ -251,6 +251,8 @@
     user-select: none;
     filter: none;
     animation: none;
+    pointer-events: auto;
+    z-index: 1;
     /* Room for the glow so the first glyph is not clipped. */
     padding-block: 0.18em;
     padding-inline: 0.5em 0.7em;
