@@ -27,6 +27,7 @@ export const profile = {
   shortName: "Yash",
   role: "Motion designer & video editor",
   email: "yushgaud@gmail.com",
+  vimeo: "https://vimeo.com/user258086591",
   philosophy: "Designing just enough",
   bio: "This is Yash. Currently a motion designer and a video editor. Primarily working on infographics and explainers. I am a big believer in high autonomy and communication. Staying with others throughout the project from beginning to the end.",
   socials: [

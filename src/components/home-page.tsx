@@ -45,14 +45,10 @@ function Hero() {
           </h1>
         </button>
       </div>
-      <p className="rise rise-2 mt-6 max-w-xl text-lg text-fg-muted">
-        {profile.role}. Infographics and explainers, from the first note to the
-        published cut.
-      </p>
-      <p className="rise rise-3 mt-6 max-w-xl text-base leading-normal text-fg-muted">
+      <p className="rise rise-2 mt-6 max-w-xl text-base leading-normal text-fg-muted">
         {profile.bio}
       </p>
-      <div className="rise rise-4 mt-8 flex flex-wrap gap-3">
+      <div className="rise rise-3 mt-8 flex flex-wrap gap-3">
         <Button asChild>
           <a href="#work" className="group">
             Selected works
