@@ -100,12 +100,12 @@ export const tools: Tool[] = [
   {
     name: "Still",
     note: "The breath before connection.",
-    href: "https://still-yash.vercel.app",
+    href: "https://still-video.grok.me",
   },
   {
     name: "re—mem",
     note: "Working memory for thoughts and tasks.",
-    href: "https://re-mem-v2.vercel.app",
+    href: "https://re-mem-v2.vercel.app/",
   },
 ];
 
