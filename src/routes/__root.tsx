@@ -67,8 +67,8 @@ function RootDocument() {
             >
               Skip to work
             </a>
-            <div className="relative z-10 flex min-h-dvh flex-col">
-              <div className="mx-auto w-full max-w-5xl flex-1">
+            <div className="relative z-10 flex min-h-dvh flex-col overflow-x-visible">
+              <div className="mx-auto w-full max-w-5xl flex-1 overflow-visible">
                 <Outlet />
               </div>
               <SiteFooter />

@@ -33,8 +33,8 @@ function Hero() {
   const { toggle, theme } = useTheme();
 
   return (
-    <section className="relative px-5 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
-      <div className="rise">
+    <section className="relative overflow-visible px-5 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
+      <div className="rise overflow-visible">
         <button
           type="button"
           onClick={toggle}
