@@ -151,6 +151,17 @@
     outline: 1px solid color-mix(in oklab, var(--fg) 10%, transparent);
     outline-offset: -1px;
   }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
 }
 
 @layer components {

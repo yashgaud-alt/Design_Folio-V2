@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input, Textarea } from "@/components/ui/input";
+import { Input, Select, Textarea } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
@@ -378,18 +378,17 @@ function ContactSection() {
                 </Field>
               </div>
               <Field label="About" htmlFor="intent">
-                <select
+                <Select
                   id="intent"
                   name="intent"
                   defaultValue="project"
-                  className="h-11 w-full rounded-xs border border-border bg-bg px-3.5 text-sm text-fg transition-[border-color] duration-150 hover:border-border-strong focus-visible:border-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
                   {intents.map((intent) => (
                     <option key={intent.value} value={intent.value}>
                       {intent.label}
                     </option>
                   ))}
-                </select>
+                </Select>
               </Field>
               <Field label="Note" htmlFor="message">
                 <Textarea
