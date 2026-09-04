@@ -90,8 +90,28 @@ export const skills = [
   { en: "Production", note: "From first note to published cut" },
 ] as const;
 
+export type Tool = {
+  name: string;
+  note: string;
+  href: string;
+};
+
+export const tools: Tool[] = [
+  {
+    name: "Still",
+    note: "The breath before connection.",
+    href: "https://still-yash.vercel.app",
+  },
+  {
+    name: "re—mem",
+    note: "Working memory for thoughts and tasks.",
+    href: "https://re-mem-v2.vercel.app",
+  },
+];
+
 export const nav = [
   { href: "work", label: "Work" },
+  { href: "tools", label: "Tools" },
   { href: "about", label: "About" },
   { href: "skills", label: "Skills" },
   { href: "contact", label: "Contact" },

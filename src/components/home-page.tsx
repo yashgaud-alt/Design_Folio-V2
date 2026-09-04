@@ -10,6 +10,7 @@ import {
   categories,
   profile,
   skills,
+  tools,
   works,
   type Category,
 } from "@/lib/site";
@@ -20,6 +21,7 @@ export function HomePage() {
     <div>
       <Hero />
       <WorksSection />
+      <ToolsSection />
       <AboutSection />
       <SkillsSection />
       <ContactSection />
@@ -150,13 +152,45 @@ function WorksSection() {
   );
 }
 
+function ToolsSection() {
+  return (
+    <section
+      id="tools"
+      className="scroll-mt-6 px-5 py-20 md:px-8 md:py-24"
+    >
+      <Reveal>
+        <SectionHead index="02" title="Tools" />
+        <ul className="grid gap-10 md:grid-cols-2 md:gap-x-8">
+          {tools.map((tool) => (
+            <li key={tool.name}>
+              <a
+                href={tool.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block text-fg no-underline"
+              >
+                <h3 className="font-sans text-lg font-medium tracking-tight transition-opacity duration-200 group-hover:opacity-70">
+                  {tool.name}
+                </h3>
+                <p className="mt-2 max-w-prose text-sm leading-normal text-fg-muted">
+                  {tool.note}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </section>
+  );
+}
+
 function AboutSection() {
   return (
     <section
       id="about"
       className="scroll-mt-6 px-5 py-20 md:px-8 md:py-24"
     >
-      <SectionHead index="02" title="About" />
+      <SectionHead index="03" title="About" />
       <Reveal>
         <div className="grid gap-12 md:grid-cols-12">
         <div className="md:col-span-7">
@@ -200,7 +234,7 @@ function SkillsSection() {
       className="scroll-mt-6 px-5 py-20 md:px-8 md:py-24"
     >
       <SectionHead
-        index="03"
+        index="04"
         title="Skills"
         kicker="Craft before tools. Tools follow the cut."
       />
@@ -283,7 +317,7 @@ function ContactSection() {
       className="scroll-mt-6 px-5 py-20 md:px-8 md:py-24"
     >
       <SectionHead
-        index="04"
+        index="05"
         title="Contact"
         kicker="No newsletter. One reply."
       />
