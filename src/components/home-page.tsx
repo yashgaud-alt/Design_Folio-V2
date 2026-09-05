@@ -5,6 +5,7 @@ import { Input, Select, Textarea } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
+import { sendInquiry } from "@/lib/inquiry";
 import { useTheme } from "@/lib/theme";
 import {
   categories,
@@ -274,9 +275,10 @@ const intents = [
 
 function ContactSection() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -284,6 +286,7 @@ function ContactSection() {
     const email = String(data.get("email") ?? "").trim();
     const intent = String(data.get("intent") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
+    const honey = String(data.get("company") ?? "").trim();
 
     if (name.length < 2) {
       setError("A name, even a short one.");
@@ -298,24 +301,23 @@ function ContactSection() {
       return;
     }
 
-    try {
-      const key = "yash-inquiries";
-      const prev = JSON.parse(localStorage.getItem(key) || "[]") as unknown[];
-      prev.push({
-        name,
-        email,
-        intent,
-        message,
-        at: new Date().toISOString(),
-      });
-      localStorage.setItem(key, JSON.stringify(prev));
-    } catch {
-      /* still show success — the note is received in the UI */
-    }
-
     setError(null);
-    setSent(true);
-    form.reset();
+    setSending(true);
+    try {
+      await sendInquiry({
+        data: { name, email, intent, message, honey },
+      });
+      setSent(true);
+      form.reset();
+    } catch (cause) {
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : "Could not send just now. Use Mail in the footer.",
+      );
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -363,6 +365,16 @@ function ContactSection() {
             </div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-5" noValidate>
+              <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                <label htmlFor="company">Company</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Name" htmlFor="name">
                   <Input
@@ -411,7 +423,9 @@ function ContactSection() {
                 </p>
               ) : null}
               <div className="flex flex-wrap items-center gap-3">
-                <Button type="submit">Send note</Button>
+                <Button type="submit" disabled={sending}>
+                  {sending ? "Sending…" : "Send note"}
+                </Button>
                 <a
                   href={`mailto:${profile.email}`}
                   className="text-sm text-fg-muted underline decoration-border underline-offset-4 hover:text-fg"
