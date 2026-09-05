@@ -304,17 +304,11 @@ function ContactSection() {
     setError(null);
     setSending(true);
     try {
-      await sendInquiry({
-        data: { name, email, intent, message, honey },
-      });
+      await sendInquiry({ name, email, intent, message, honey });
       setSent(true);
       form.reset();
-    } catch (cause) {
-      setError(
-        cause instanceof Error
-          ? cause.message
-          : "Could not send just now. Use Mail in the footer.",
-      );
+    } catch {
+      setError("Could not send just now. Use Mail in the footer.");
     } finally {
       setSending(false);
     }
